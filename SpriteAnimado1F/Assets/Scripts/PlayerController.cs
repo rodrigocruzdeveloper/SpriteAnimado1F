@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround;
 
     private Rigidbody2D rigidbody2D;
+    private Animator animator;
     
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     
     // 0.007
@@ -54,7 +56,7 @@ public class PlayerController : MonoBehaviour
             currentJumpDuration = 0.0f;
         }
 
-        
+        Animations();
 
     }
 
@@ -74,6 +76,12 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(sensorGroundPosition.position, sensorSize);
+    }
+
+    void Animations()
+    {
+        animator.SetInteger("pMove", (int)moveX);
+        animator.SetInteger("pVelocityJump", (int)rigidbody2D.linearVelocityY);
     }
 
 }
